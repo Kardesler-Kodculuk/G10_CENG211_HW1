@@ -1,9 +1,36 @@
 
 public class PicnicBag<T> implements IBag<T> {
+	
+	private int size;
+	private T[] picnicBag;
 
+	@SuppressWarnings("unchecked")
+	public PicnicBag(String size) {
+		switch(size) {
+		case "small":
+			this.size = 5;
+			break;
+		case "normal":
+			this.size = 10;
+			break;
+		case "large":
+			this.size = 15;
+			break;
+		default:
+			break;
+		}
+		
+		picnicBag = (T[]) new Object[this.size];
+	}
+	
+	
 	@Override
 	public boolean add(T newItem) {
 		// TODO Auto-generated method stub
+		int amount = getItemCount();
+		if(isFull()) {return false;}
+		
+		
 		return false;
 	}
 
