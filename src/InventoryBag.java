@@ -14,6 +14,9 @@ public class InventoryBag<T> implements IBag<T> {
 		this.pointer = 0;
 	}
 
+	/**Add an item to this bag.
+	 * @param newItem - Item to add
+	 * @return true if successful, false if not.*/
 	@Override
 	public boolean add(T newItem) {
 		if (this.contains(newItem)) {
@@ -142,6 +145,7 @@ public class InventoryBag<T> implements IBag<T> {
 		System.out.println(string);
 	}
 
+	/**Deletes all the elements inside the bag. */
 	@Override
 	public void dump() {
 		for (int i = 0; i < items.length; i++) {
@@ -149,9 +153,19 @@ public class InventoryBag<T> implements IBag<T> {
 		}
 	}
 
+	/** Attempt to transfer an instance of an item from
+	 * this bag to another bag.
+	 * @param targetBag - Bag to add the item, if available.
+	 * @param item - Which item to add.
+	 * @return true if successful, else, false*/
 	@Override
 	public boolean transferTo(IBag<T> targetBag, T item) {
-		// TODO Auto-generated method stub
+		if (this.contains(item)) {
+			targetBag.add(item);
+			int indexOfItem = getIndexOf(item);
+			itemCounts[indexOfItem]--;
+			return true;
+		}
 		return false;
 	}
 
