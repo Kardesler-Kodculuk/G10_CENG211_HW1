@@ -10,12 +10,25 @@ public class InventoryBag<T> implements IBag<T> {
 	public InventoryBag(int size) {
 		items = (T[]) new Object[size];
 		itemCounts = new int[size];
+		this.length = size;
+		this.pointer = 0;
 	}
 
 	@Override
 	public boolean add(T newItem) {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.contains(newItem)) {
+			int indexOfItem = getIndexOf(newItem);
+			itemCounts[indexOfItem]++;
+			return true;
+		}
+		if (this.pointer == this.length) {
+				return false;
+		}
+		
+		items[this.pointer] = newItem;
+		itemCounts[this.pointer]++;
+		this.pointer++;
+		return true;
 	}
 	
 
@@ -103,22 +116,37 @@ public class InventoryBag<T> implements IBag<T> {
 		return index;
 	}
 
+	/**Implements the contains public method.
+	 * @param item to check if it is in the bag.
+	 * @return true if is in, false if not.*/
 	@Override
 	public boolean contains(T item) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < this.items.length; i++) {
+			if (item.equals(this.items[i]) && this.itemCounts[i] > 0) {
+				return true;
+			}
+		}
 		return false;
 	}
 
+	/**Print the items as a list with each item
+	 * occupying one line. with its value. */
 	@Override
 	public void displayItems() {
-		// TODO Auto-generated method stub
-		
+		String string = "";
+		for (int i = 0; i < items.length; i++) {
+			if (itemCounts[i] > 0) {
+				string += items[i].toString() +  ((Integer) itemCounts[i]).toString() + "\n";
+			}
+		}
+		System.out.println(string);
 	}
 
 	@Override
 	public void dump() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < items.length; i++) {
+			itemCounts[i] = 0;
+		}
 	}
 
 	@Override
