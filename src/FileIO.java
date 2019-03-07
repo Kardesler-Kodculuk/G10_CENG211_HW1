@@ -11,16 +11,17 @@ public class FileIO {
 	private Item[] items;
 	private String fileName;
 	
-	/** Initilise a fileIO object with a fileName.
+	/** Initialise a fileIO object with a fileName.
 	 * 
 	 * @param fileName
 	 */
 	public FileIO(String fileName) {
 		this.fileName = fileName;
+		
 	}
 	
 	/** A private method to determine the inventory size
-	 * so that the lines array may be initilised.
+	 * so that the lines array may be initialised.
 	 * @param fileName - Name of the file to be parsed
 	 * @return true if successful.
 	 * @return false if unsuccessful.
@@ -31,7 +32,7 @@ public class FileIO {
 			int lineCount = 0;
 			BufferedReader fileIn = new BufferedReader(new FileReader(fileName));
 			while (fileIn.ready()) {
-				fileIn.read();
+				fileIn.readLine();
 				lineCount++;
 			}
 			fileIn.close();
@@ -60,7 +61,7 @@ public class FileIO {
 	 * @return inventoryBag object holding the inventory.
 	 */
 	public IBag<Item> readInventory() {
-		boolean success = readInventoryFile(this.fileName);
+		boolean success = readInventoryFile(this.fileName); // Check if it errors out.
 		StringTokenizer commaSeperator;
 		String name;
 		String disposableType;
@@ -69,9 +70,9 @@ public class FileIO {
 		// Populating the arrays.
 		for (int i = 0; i < this.linesArray.length; i++) {
 			commaSeperator = new StringTokenizer(this.linesArray[i], ",");
-			name = (String) commaSeperator.nextElement();
-			disposableType = (String) commaSeperator.nextElement();
-			number = (int) commaSeperator.nextElement();
+			name = commaSeperator.nextElement().toString();
+			disposableType = commaSeperator.nextElement().toString();
+			number = Integer.parseInt(commaSeperator.nextElement().toString());
 			this.items[i] = new Item(name, disposableType);
 			this.itemCounts[i] = number;
 		}
@@ -81,7 +82,7 @@ public class FileIO {
 			sum += this.itemCounts[i];
 		}
 		
-		//Initilising the InventoryBag
+		//Initialise the InventoryBag
 		
 		IBag <Item> inventory = new InventoryBag<Item>(sum);
 		

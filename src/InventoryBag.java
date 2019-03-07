@@ -19,7 +19,7 @@ public class InventoryBag<T> implements IBag<T> {
 	 * @return true if successful, false if not.*/
 	@Override
 	public boolean add(T newItem) {
-		if (this.contains(newItem)) {
+		if (this.getIndexOf(newItem) >= 0) {
 			int indexOfItem = getIndexOf(newItem);
 			itemCounts[indexOfItem]++;
 			return true;
@@ -67,6 +67,7 @@ public class InventoryBag<T> implements IBag<T> {
 
 	/** Remove one member of any item from the inventory 
 	 * @return an item.
+	 * @return null if item unavailable.
 	 * */
 	@Override
 	public T remove() {
@@ -111,7 +112,7 @@ public class InventoryBag<T> implements IBag<T> {
 	public int getIndexOf(T item) {
 		int index = -1;
 		for (int i = 0; i < this.items.length; i++) {
-			if (items[i].equals(item)) {
+			if (items[i] != null && items[i].equals(item)) {
 				index = i;
 				break;
 			}
@@ -139,7 +140,8 @@ public class InventoryBag<T> implements IBag<T> {
 		String string = "";
 		for (int i = 0; i < items.length; i++) {
 			if (itemCounts[i] > 0) {
-				string += items[i].toString() +  ((Integer) itemCounts[i]).toString() + "\n";
+				string += (i + 1) + " - " + items[i].toString() + ", " +
+						Integer.valueOf(itemCounts[i]).toString() + "\n";
 			}
 		}
 		System.out.println(string);
@@ -161,10 +163,12 @@ public class InventoryBag<T> implements IBag<T> {
 	@Override
 	public boolean transferTo(IBag<T> targetBag, T item) {
 		if (this.contains(item)) {
-			targetBag.add(item);
-			int indexOfItem = getIndexOf(item);
-			itemCounts[indexOfItem]--;
-			return true;
+			boolean result = targetBag.add(item);
+			if (result) {
+				int indexOfItem = getIndexOf(item);
+				itemCounts[indexOfItem]--; 
+				}
+			return result;
 		}
 		return false;
 	}
