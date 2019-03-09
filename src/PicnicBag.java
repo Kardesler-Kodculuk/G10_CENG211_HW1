@@ -65,10 +65,10 @@ public class PicnicBag<T> implements IBag<T> {
 		if(picnicBag[index] == null) {return null;}
 		else {
 			@SuppressWarnings("unchecked")
-			T itemType = (T) picnicBag[index].getClass();
+			T removedItem = picnicBag[index];
 			picnicBag[index] = null;
 			totalAmount--;
-			return itemType;
+			return removedItem;
 		}
 	}
 
@@ -81,7 +81,7 @@ public class PicnicBag<T> implements IBag<T> {
 			{
 				T removedItem = picnicBag[size - (i+1)];
 				picnicBag[size - (i+1)] = null;
-				return (T) removedItem.getClass();
+				return removedItem;
 			}
 		}
 		return null;
@@ -92,10 +92,9 @@ public class PicnicBag<T> implements IBag<T> {
 		if(contains(item)) {
 			int itemIndex = getIndexOf(item);
 			@SuppressWarnings("unchecked")
-			T itemType = (T) item.getClass();
 			picnicBag[itemIndex] = null;
 			totalAmount--;
-			return itemType;
+			return item;
 		}
 		else {
 			return null;
