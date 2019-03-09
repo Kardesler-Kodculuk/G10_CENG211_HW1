@@ -29,6 +29,54 @@ public class PicnicBagApp {
 		}
 		input.close();
 		System.out.println("You are goin to the picnic now...");
+		
+		// Don't ask about these testing chaos!
+//		PicnicBag<String> bagLarge = new PicnicBag<String>("large");
+//		PicnicBag<String> bagNormal = new PicnicBag<String>("normal");
+//		PicnicBag<String> bagSmall = new PicnicBag<String>("small");
+//		System.out.println(bagSmall.isEmpty());
+//		System.out.println(bagSmall.isFull());
+//		bagSmall.add("banana");
+//		bagSmall.add("banana");
+//		bagSmall.add("egg");
+//		bagSmall.add("egg");
+//		bagSmall.add("lemon");
+//		bagSmall.displayItems();
+//		System.out.println(bagSmall.getItemCount());
+//		bagSmall.remove("banana");
+//		bagSmall.removeByIndex(2);
+//		bagSmall.remove();
+//		bagSmall.displayItems();
+//		System.out.println(bagSmall.getItemCount());
+//		bagSmall.add("e");
+//		bagSmall.add("e");
+//		bagSmall.add("e");
+//		bagSmall.add("e");
+//		bagSmall.displayItems();
+//		System.out.println(bagSmall.getItemCount());
+//		System.out.println(bagSmall.isEmpty());
+//		bagNormal.remove();
+//		bagSmall.remove("lemon");
+//		System.out.println(bagSmall.getIndexOf("egg"));
+//		System.out.println(bagSmall.getIndexOf("salam"));
+//		bagSmall.dump();
+//		bagSmall.add("lemon");
+//		bagSmall.displayItems();
+//		bagSmall.transferTo(bagNormal, "lemon");
+//		bagSmall.transferTo(bagNormal, "egg");
+//		bagSmall.displayItems();
+//		bagNormal.displayItems();
+//		bagSmall.add("egg");
+//		bagSmall.add("banana");
+//		bagSmall.consume("banana");
+//		bagSmall.consume("milk");
+//		bagSmall.displayItems();
+//		bagSmall.removeByIndex(3);
+//		bagLarge.getItemCount();
+		
+		
+		
+		
 	}
 	
 
