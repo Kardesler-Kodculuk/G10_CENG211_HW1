@@ -72,10 +72,7 @@ public class PicnicBagApp {
 //		bagSmall.consume("milk");
 //		bagSmall.displayItems();
 //		bagSmall.removeByIndex(3);
-//		bagLarge.getItemCount();
-		
-		
-		
+//		bagLarge.getItemCount();		
 		
 	}
 	
