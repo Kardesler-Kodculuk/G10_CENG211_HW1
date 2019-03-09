@@ -64,7 +64,6 @@ public class PicnicBag<T> implements IBag<T> {
 	public T removeByIndex(int index) {
 		if(picnicBag[index] == null) {return null;}
 		else {
-			@SuppressWarnings("unchecked")
 			T removedItem = picnicBag[index];
 			picnicBag[index] = null;
 			totalAmount--;
@@ -72,7 +71,6 @@ public class PicnicBag<T> implements IBag<T> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public T remove() {
 		for(int i = 0; i < size; i++)
@@ -91,7 +89,6 @@ public class PicnicBag<T> implements IBag<T> {
 	public T remove(T item) {
 		if(contains(item)) {
 			int itemIndex = getIndexOf(item);
-			@SuppressWarnings("unchecked");
 			picnicBag[itemIndex] = null;
 			totalAmount--;
 			return item;
@@ -127,7 +124,6 @@ public class PicnicBag<T> implements IBag<T> {
 
 	@Override
 	public boolean contains(T item) {
-		// TODO Auto-generated method stub
 		for(T e:picnicBag) {
 			if(e == item) {
 				return true;
