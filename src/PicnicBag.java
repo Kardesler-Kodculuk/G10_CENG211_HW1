@@ -91,7 +91,7 @@ public class PicnicBag<T> implements IBag<T> {
 	public T remove(T item) {
 		if(contains(item)) {
 			int itemIndex = getIndexOf(item);
-			@SuppressWarnings("unchecked")
+			@SuppressWarnings("unchecked");
 			picnicBag[itemIndex] = null;
 			totalAmount--;
 			return item;
