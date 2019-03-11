@@ -49,7 +49,7 @@ public class PicnicBag<T> implements IBag<T> {
 
 	@Override
 	public boolean isEmpty() {
-		if(this.totalAmount == 0) {return true;}
+		if(getItemCount() == 0) {return true;}
 		else {return false;}
 		
 	}

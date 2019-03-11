@@ -9,7 +9,11 @@ public class PaperTrashBag<T> implements IBag<T> {
 		trashBag = (T[]) new Object[15];
 	}
 	
-	// adds a new item to the bag
+	/** Adds a new item to the bag
+	 * @param newItem - new item.
+	 * @return true - if sucessful.
+	 * @return false - if unsucessful.
+	 */
 	@Override
 	public boolean add(T newItem) {
 		if(isFull()) 
