@@ -6,7 +6,7 @@ import org.omg.PortableInterceptor.SUCCESSFUL;
 
 class InventoryBagTest {
 
-	private InventoryBag inventory;
+	private InventoryBag<String> inventory;
 	
 	@BeforeEach
 	void setUp() throws Exception {
