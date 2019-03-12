@@ -123,6 +123,7 @@ public class PlasticTrashBag<T> implements IBag<T> {
 	@Override
 	public void displayItems() {
 		for(T e:trashBag) {
+			if(e != null)
 			System.out.println(e);
 		}
 	}

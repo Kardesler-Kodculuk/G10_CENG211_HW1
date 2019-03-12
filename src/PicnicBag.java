@@ -5,6 +5,10 @@ public class PicnicBag<T> implements IBag<T> {
 	private T[] picnicBag;
 	private int totalAmount = getItemCount();
 
+	/**
+	 * The constructor of PicnicBag class
+	 * @param size	"small" (5), "normal" (10) or "large" (15)
+	 */
 	@SuppressWarnings("unchecked")
 	public PicnicBag(String size) {
 		switch(size) {
@@ -53,6 +57,7 @@ public class PicnicBag<T> implements IBag<T> {
 		else {return false;}
 		
 	}
+
 
 	@Override
 	public boolean isFull() {
@@ -134,8 +139,17 @@ public class PicnicBag<T> implements IBag<T> {
 
 	@Override
 	public void displayItems() {
+//		for(int i = 0; i < picnicBag.length; i++)
+//		{
+//			if
+//			System.out.println((i+1) + " " + picnicBag[i]);
 		for(T e:picnicBag) {
+			if(e != null)
 			System.out.println(e);
+			else
+			{
+				System.out.println("Empty");
+			}
 		}
 		
 	}
@@ -157,13 +171,37 @@ public class PicnicBag<T> implements IBag<T> {
 		}
 		return false;
 	}
+	
+	/**
+	 * Consumes the item and transfers it to a trashBag by it's disposableType
+	 * @param item	item that gonna consume
+	 * @param trashBags	an array that holds organic,plastic and paper trashBags
+	 * @return true if consumed, false if item doesn't exist
+	 */
+	@SuppressWarnings("unchecked")
+	public boolean consume(T item, IBag<T>[] trashBags) {
+		if(contains(item)) 
+		{
+			//InventoryBag<Item> inventory = FileIO.readInventory();
+			Item consumedItem = (Item) this.remove(item);
+			String disposableType = consumedItem.getDisposibleType();
 
-	public boolean consume(T item) {
-		if(contains(item)) {
-			remove(item);
+			switch(disposableType)
+			{
+			case "organic":
+				trashBags[0] = (IBag<T>) consumedItem;
+			case "plastic":
+				trashBags[1] = (IBag<T>) consumedItem;
+			case "paper":
+				trashBags[2] = (IBag<T>) consumedItem;
+			}
 			return true;
 		}
-		return false;
+		else {return false;}
 	}
-	
+
+	public T getItem(int index)
+	{
+		return picnicBag[index];
+	}
 }

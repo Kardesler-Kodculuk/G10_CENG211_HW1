@@ -61,6 +61,7 @@ public class FileIO {
 	 * @return inventoryBag object holding the inventory.
 	 */
 	public IBag<Item> readInventory() {
+		// TODO implement the updated version  public static InventoryBag<Item> readInventory();
 		boolean success = readInventoryFile(this.fileName); // Check if it errors out.
 		StringTokenizer commaSeperator;
 		String name;
