@@ -30,7 +30,8 @@ public class PicnicBagApp {
 		input.close();
 		System.out.println("You are goin to the picnic now...");
 		
-		// Don't ask about these testing chaos!
+		// ----------------------------------------------------------------
+		// Don't ask about this testing chaos!
 //		PicnicBag<String> bagLarge = new PicnicBag<String>("large");
 //		PicnicBag<String> bagNormal = new PicnicBag<String>("normal");
 //		PicnicBag<String> bagSmall = new PicnicBag<String>("small");

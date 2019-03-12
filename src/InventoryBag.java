@@ -19,13 +19,13 @@ public class InventoryBag<T> implements IBag<T> {
 	 * @return true if successful, false if not.*/
 	@Override
 	public boolean add(T newItem) {
+		if (this.getItemCount() == this.length) {
+			return false;
+		}
 		if (this.getIndexOf(newItem) >= 0) {
 			int indexOfItem = getIndexOf(newItem);
 			itemCounts[indexOfItem]++;
 			return true;
-		}
-		if (this.pointer == this.length) {
-				return false;
 		}
 		
 		items[this.pointer] = newItem;
@@ -49,7 +49,7 @@ public class InventoryBag<T> implements IBag<T> {
 	/** Return true if full. */
 	@Override
 	public boolean isFull() {
-		return this.length == (this.pointer + 1);
+		return this.length == (getItemCount());
 	}
 
 	/** Remove one member of the item from the inventory
@@ -86,9 +86,11 @@ public class InventoryBag<T> implements IBag<T> {
 	@Override
 	public T remove(T item) {
 		int itemIndex = getIndexOf(item);
-		if (itemCounts[itemIndex] > 0) {
-			itemCounts[itemIndex]--;
-			return item;
+		if (itemIndex != -1) {
+			if (itemCounts[itemIndex] > 0) {
+				itemCounts[itemIndex]--;
+				return item;
+			}
 		}
 		return null;
 	}
