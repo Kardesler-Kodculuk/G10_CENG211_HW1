@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class PicnicBagApp {
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		// Conduct Testing Here.
 		FileIO fileInterface = new FileIO("CENG112_Homework1_Bags_Inventory.txt");
@@ -11,7 +10,6 @@ public class PicnicBagApp {
 		System.out.println("Please enter the ID of the stuff "
 				+ "you want to take with you. When finished, "
 				+ "enter -1.");
-//		int prompt = 0;
 		boolean enoughSpace;
 		Scanner input = new Scanner(System.in);
 		int prompt = input.nextInt();
@@ -32,10 +30,11 @@ public class PicnicBagApp {
 		input.close();
 		System.out.println("You are goin to the picnic now...");
 		
-		Object[] trashBags = new Object[3][1];
-		trashBags[0] = new OrganicTrashBag<Item>();
-		trashBags[1] = new PlasticTrashBag<Item>();
-		trashBags[2] = new PaperTrashBag<Item>();
+		@SuppressWarnings("unchecked")
+		IBag<Item>[] trashBags = (IBag<Item>[]) new Object[3]; // TODO fix
+		trashBags[0] = new OrganicTrashBag<Item>(); // fix also
+		trashBags[1] = new PlasticTrashBag<Item>(); // fix also
+		trashBags[2] = new PaperTrashBag<Item>(); // fix also
 		
 		while(prompt != 0)
 		{
@@ -43,14 +42,19 @@ public class PicnicBagApp {
 					+ "When finished, enter 0.");
 			picnic.displayItems();
 			prompt = input.nextInt();
-			picnic.consume(picnic.getItem(prompt - 1), (IBag<Item>[]) trashBags);
+			picnic.consume(picnic.getItem(prompt - 1), trashBags);
 		}
-		System.out.println("Organic trashs" + ((IBag<Item>) trashBags[0]).getItemCount());
-		((IBag<Item>) trashBags[0]).displayItems();
-		System.out.println("Plastic trashs" + ((IBag<Item>) trashBags[1]).getItemCount());
-		((IBag<Item>) trashBags[1]).displayItems();
-		System.out.println("Paper trashs" + ((IBag<Item>) trashBags[2]).getItemCount());
-		((IBag<Item>) trashBags[2]).displayItems();
+		System.out.println("Organic trashs" + trashBags[0].getItemCount());
+		trashBags[0].displayItems();
+		System.out.println("Plastic trashs" + trashBags[1].getItemCount());
+		trashBags[1].displayItems();
+		System.out.println("Paper trashs" + trashBags[2].getItemCount());
+		trashBags[2].displayItems();
+		
+		for(int i = 0; i <= 2; i++)
+		{
+			trashBags[i].dump();
+		}
 		
 		
 		
