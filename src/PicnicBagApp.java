@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class PicnicBagApp {
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		// Conduct Testing Here.
 		IBag<Item> inventory = FileIO.readInventory();
@@ -30,6 +29,7 @@ public class PicnicBagApp {
 		System.out.println("You are goin to the picnic now...");
 		
 		// Creates the trash bags
+		@SuppressWarnings("unchecked")
 		IBag<Item>[] trashBags = new IBag[3];
 		trashBags[0] = new OrganicTrashBag<Item>(); // fix also
 		trashBags[1] = new PlasticTrashBag<Item>(); // fix also
