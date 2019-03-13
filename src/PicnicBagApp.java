@@ -4,8 +4,7 @@ public class PicnicBagApp {
 
 	public static void main(String[] args) {
 		// Conduct Testing Here.
-		FileIO fileInterface = new FileIO("CENG112_Homework1_Bags_Inventory.txt");
-		IBag<Item> inventory = fileInterface.readInventory();
+		IBag<Item> inventory = FileIO.readInventory();
 		PicnicBag<Item> picnic = new PicnicBag<Item>("small");
 		System.out.println("Please enter the ID of the stuff "
 				+ "you want to take with you. When finished, "
