@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class PicnicBagApp {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		// Conduct Testing Here.
 		IBag<Item> inventory = FileIO.readInventory();
@@ -26,35 +27,42 @@ public class PicnicBagApp {
 			}
 			prompt = input.nextInt();
 		}
-		input.close();
 		System.out.println("You are goin to the picnic now...");
 		
-		@SuppressWarnings("unchecked")
-		IBag<Item>[] trashBags = (IBag<Item>[]) new Object[3]; // TODO fix
+		// Creates the trash bags
+		IBag<Item>[] trashBags = new IBag[3];
 		trashBags[0] = new OrganicTrashBag<Item>(); // fix also
 		trashBags[1] = new PlasticTrashBag<Item>(); // fix also
-		trashBags[2] = new PaperTrashBag<Item>(); // fix also
+		trashBags[2] = new PaperTrashBag<Item>();		
 		
+		// Now in picnic. User can consume items or/and end the picnic
 		while(prompt != 0)
 		{
 			System.out.println("Enter the item number that you wanna consume. "
 					+ "When finished, enter 0.");
 			picnic.displayItems();
 			prompt = input.nextInt();
-			picnic.consume(picnic.getItem(prompt - 1), trashBags);
+			if(prompt != 0) {
+				picnic.consume(picnic.getItem(prompt - 1), trashBags);
+			}
 		}
-		System.out.println("Organic trashs" + trashBags[0].getItemCount());
+		input.close();
+		
+		// Prints the trashes and the number of the trashes in the trash bags
+		System.out.println("Organic trashes: " + trashBags[0].getItemCount());
 		trashBags[0].displayItems();
-		System.out.println("Plastic trashs" + trashBags[1].getItemCount());
+		System.out.println("Plastic trashes: " + trashBags[1].getItemCount());
 		trashBags[1].displayItems();
-		System.out.println("Paper trashs" + trashBags[2].getItemCount());
+		System.out.println("Paper trashes: " + trashBags[2].getItemCount());
 		trashBags[2].displayItems();
 		
+		// Dumps the trash bags
 		for(int i = 0; i <= 2; i++)
 		{
 			trashBags[i].dump();
 		}
 		
+		System.out.println("The trashes are dumped!");
 		
 		
 		

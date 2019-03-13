@@ -189,11 +189,14 @@ public class PicnicBag<T> implements IBag<T> {
 			switch(disposableType)
 			{
 			case "organic":
-				trashBags[0] = (IBag<T>) consumedItem;
+				trashBags[0].add((T) consumedItem);
+				break;
 			case "plastic":
-				trashBags[1] = (IBag<T>) consumedItem;
+				trashBags[1].add((T) consumedItem);
+				break;
 			case "paper":
-				trashBags[2] = (IBag<T>) consumedItem;
+				trashBags[2].add((T) consumedItem);
+				break;
 			}
 			return true;
 		}
@@ -202,6 +205,9 @@ public class PicnicBag<T> implements IBag<T> {
 
 	public T getItem(int index)
 	{
-		return picnicBag[index];
+		if(index >= 0 && index < size) {
+			return picnicBag[index];
+		}
+		else {return null;}
 	}
 }
