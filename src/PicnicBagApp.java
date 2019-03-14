@@ -5,14 +5,39 @@ public class PicnicBagApp {
 	public static void main(String[] args) {
 		// Conduct Testing Here.
 		IBag<Item> inventory = FileIO.readInventory();
-		PicnicBag<Item> picnic = new PicnicBag<Item>("small");
+		
+		// Select bag size 
+		String picnicSize = null;
+		System.out.println("Select a bag size:\n"
+				+ "1 for Small (5)\n"
+				+ "2 for Normal (10)\n"
+				+ "3 for Large (15)");
+		Scanner input = new Scanner(System.in);
+		int sizeSelection = input.nextInt();
+
+		switch(sizeSelection)
+		{
+		case 1:
+			picnicSize = "small";
+			break;
+		case 2:
+			picnicSize = "normal";
+			break;
+		case 3:
+			picnicSize = "large";
+			break;
+		}
+		PicnicBag<Item> picnic = new PicnicBag<Item>(picnicSize);
+		
+		// Item select for picnic
+		inventory.displayItems();
+
 		System.out.println("Please enter the ID of the stuff "
 				+ "you want to take with you. When finished, "
-				+ "enter -1.");
+				+ "enter 0.");
 		boolean enoughSpace;
-		Scanner input = new Scanner(System.in);
 		int prompt = input.nextInt();
-		while (prompt != -1) {
+		while (prompt != 0) {
 			Item item = inventory.removeByIndex(prompt);
 			if (item != null) {
 				inventory.add(item);
@@ -31,11 +56,12 @@ public class PicnicBagApp {
 		// Creates the trash bags
 		@SuppressWarnings("unchecked")
 		IBag<Item>[] trashBags = new IBag[3];
-		trashBags[0] = new OrganicTrashBag<Item>(); // fix also
-		trashBags[1] = new PlasticTrashBag<Item>(); // fix also
+		trashBags[0] = new OrganicTrashBag<Item>();
+		trashBags[1] = new PlasticTrashBag<Item>();
 		trashBags[2] = new PaperTrashBag<Item>();		
 		
 		// Now in picnic. User can consume items or/and end the picnic
+		prompt = -1;
 		while(prompt != 0)
 		{
 			System.out.println("Enter the item number that you wanna consume. "
@@ -63,54 +89,6 @@ public class PicnicBagApp {
 		}
 		
 		System.out.println("The trashes are dumped!");
-		
-		
-		
-		
-		// ----------------------------------------------------------------
-		// Don't ask about this testing chaos!
-//		PicnicBag<String> bagLarge = new PicnicBag<String>("large");
-//		PicnicBag<String> bagNormal = new PicnicBag<String>("normal");
-//		PicnicBag<String> bagSmall = new PicnicBag<String>("small");
-//		System.out.println(bagSmall.isEmpty());
-//		System.out.println(bagSmall.isFull());
-//		bagSmall.add("banana");
-//		bagSmall.add("banana");
-//		bagSmall.add("egg");
-//		bagSmall.add("egg");
-//		bagSmall.add("lemon");
-//		bagSmall.displayItems();
-//		System.out.println(bagSmall.getItemCount());
-//		bagSmall.remove("banana");
-//		bagSmall.removeByIndex(2);
-//		bagSmall.remove();
-//		bagSmall.displayItems();
-//		System.out.println(bagSmall.getItemCount());
-//		bagSmall.add("e");
-//		bagSmall.add("e");
-//		bagSmall.add("e");
-//		bagSmall.add("e");
-//		bagSmall.displayItems();
-//		System.out.println(bagSmall.getItemCount());
-//		System.out.println(bagSmall.isEmpty());
-//		bagNormal.remove();
-//		bagSmall.remove("lemon");
-//		System.out.println(bagSmall.getIndexOf("egg"));
-//		System.out.println(bagSmall.getIndexOf("salam"));
-//		bagSmall.dump();
-//		bagSmall.add("lemon");
-//		bagSmall.displayItems();
-//		bagSmall.transferTo(bagNormal, "lemon");
-//		bagSmall.transferTo(bagNormal, "egg");
-//		bagSmall.displayItems();
-//		bagNormal.displayItems();
-//		bagSmall.add("egg");
-//		bagSmall.add("banana");
-//		bagSmall.consume("banana");
-//		bagSmall.consume("milk");
-//		bagSmall.displayItems();
-//		bagSmall.removeByIndex(3);
-//		bagLarge.getItemCount();		
 		
 	}
 	

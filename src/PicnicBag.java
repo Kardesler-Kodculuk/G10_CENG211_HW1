@@ -120,7 +120,7 @@ public class PicnicBag<T> implements IBag<T> {
 	@Override
 	public int getIndexOf(T item) {
 		for(int i = 0; i < picnicBag.length; i++) {
-			if(picnicBag[i].equals(item)) {
+			if(picnicBag[i] != null && picnicBag[i].equals(item)) {
 				return i;
 			}
 		}
@@ -139,20 +139,33 @@ public class PicnicBag<T> implements IBag<T> {
 
 	@Override
 	public void displayItems() {
+		for(int i = 0; i < size; i++)
+		{
+			if(getItem(i) != null)
+			{
+				System.out.println((i + 1) + " - " + getItem(i));				
+			}
+
+		}
+		
+		
+//		for(T e:picnicBag) {
+//			if(e != null)
+//			System.out.println(e);
+//		
 //		for(int i = 0; i < picnicBag.length; i++)
 //		{
 //			if
 //			System.out.println((i+1) + " " + picnicBag[i]);
-		for(T e:picnicBag) {
-			if(e != null)
-			System.out.println(e);
-			else
-			{
-				System.out.println("Empty");
-			}
-		}
-		
+//		for(T e:picnicBag) {
+//			if(e != null)
+//			System.out.println(e);
+//			else
+//			{
+//				System.out.println("Empty");
+//			}
 	}
+		
 
 	@Override
 	public void dump() {
