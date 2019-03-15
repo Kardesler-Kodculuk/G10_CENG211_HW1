@@ -2,18 +2,20 @@ import java.util.Scanner;
 
 public class PicnicBagApp {
 
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
-		// Conduct Testing Here.
-		IBag<Item> inventory = FileIO.readInventory();
-		
-		// Select bag size 
+	/**
+	 * Ask the user the size of the picnic bag
+	 * @param input - Scanner object for user input
+	 * @return null if wrong.
+	 * @return small for user input 1.
+	 * @return normal for user input 2.
+	 * @return large for user input 3.
+	 */
+	private static String determinePicnicBagSize(Scanner input) {
 		String picnicSize = null;
 		System.out.println("Select a bag size:\n"
 				+ "1 for Small (5)\n"
 				+ "2 for Normal (10)\n"
 				+ "3 for Large (15)");
-		Scanner input = new Scanner(System.in);
 		int sizeSelection = input.nextInt();
 
 		switch(sizeSelection)
@@ -28,6 +30,24 @@ public class PicnicBagApp {
 			picnicSize = "large";
 			break;
 		}
+		return picnicSize;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) {
+		// Conduct Testing Here.
+		IBag<Item> inventory = FileIO.readInventory();
+		Scanner input = new Scanner(System.in);
+		// Select bag size 
+		String picnicSize;
+		
+		// Will loop as long as the user doesn't enter an acceptable input.
+		do {
+			picnicSize = determinePicnicBagSize(input);
+			if (picnicSize != null) break;
+			System.out.println("Please enter an acceptable input");
+		} while (true);
+
 		PicnicBag<Item> picnic = new PicnicBag<Item>(picnicSize);
 		
 		// Item select for picnic
@@ -38,10 +58,10 @@ public class PicnicBagApp {
 		boolean enoughSpace;
 		int prompt = input.nextInt();
 		while (prompt != 0) {
-			Item item = inventory.removeByIndex(prompt);
-			if (item != null) {
-				inventory.add(item);
-				enoughSpace = inventory.transferTo(picnic, item);
+			Item item = inventory.removeByIndex(prompt); // If the item is removable
+			if (item != null) { // That means item does exist, so it can be transferred
+				inventory.add(item); // We add the item back, so it won't make a change
+				enoughSpace = inventory.transferTo(picnic, item); // And then transfer.
 				if (!enoughSpace) {
 					System.out.println("No more space in picnic box, exiting loop...");
 					break;
@@ -49,7 +69,7 @@ public class PicnicBagApp {
 			} else {
 				System.out.println("Item doesn't exist.");
 			}
-			inventory.displayItems();
+			inventory.displayItems(); // TODO: Fix this.
 			prompt = input.nextInt();
 			
 		}
