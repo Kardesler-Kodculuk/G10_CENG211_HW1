@@ -1,3 +1,4 @@
+import java.io.ObjectInputStream.GetField;
 import java.util.Scanner;
 
 public class PicnicBagApp {
@@ -55,21 +56,20 @@ public class PicnicBagApp {
 		System.out.println("Please enter the ID of the stuff "
 				+ "you want to take with you. When finished, "
 				+ "enter 0.");
-		boolean enoughSpace;
 		int prompt = input.nextInt();
 		while (prompt != 0) {
 			Item item = inventory.removeByIndex(prompt - 1); // If the item is removable
 			if (item != null) { // That means item does exist, so it can be transferred
 				inventory.add(item); // We add the item back, so it won't make a change
-				enoughSpace = inventory.transferTo(picnic, item); // And then transfer.
-				if (!enoughSpace) {
+				inventory.transferTo(picnic, item); // And then transfer.
+				if (picnic.isFull()) {
 					System.out.println("No more space in picnic box, exiting loop...");
 					break;
 				}
 			} else {
 				System.out.println("Item doesn't exist.");
 			}
-			inventory.displayItems(); // TODO: Fix this.
+			inventory.displayItems();
 			prompt = input.nextInt();
 			
 		}
@@ -77,7 +77,6 @@ public class PicnicBagApp {
 		
 
 		// Creates the trash bags
-		@SuppressWarnings("unchecked")
 		IBag<Item>[] trashBags = new IBag[3];
 		trashBags[0] = new OrganicTrashBag<Item>();
 		trashBags[1] = new PlasticTrashBag<Item>();
@@ -93,6 +92,10 @@ public class PicnicBagApp {
 			prompt = input.nextInt();
 			if(prompt != 0) {
 				picnic.consume(picnic.getItem(prompt - 1), trashBags);
+			}
+			if(picnic.getItemCount() == 0) {
+				System.out.println("All items consumed.");
+				break;
 			}
 		}
 		input.close();

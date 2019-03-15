@@ -76,7 +76,11 @@ public class FileIO {
 		int number;
 		int sum = 0;
 		
-		// Populating the other arrays.
+		/** Populating the other arrays.
+		 * This is done via splitting each element of line array,
+		 * And creating items and item lists, which are used to populate
+		 * The inventoryBag.
+		 */
 		for (int i = 0; i < linesArray.length; i++) {
 			commaSeperator = new StringTokenizer(linesArray[i], ",");
 			name = commaSeperator.nextElement().toString();
