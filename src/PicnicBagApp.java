@@ -2,10 +2,12 @@ import java.util.Scanner;
 
 public class PicnicBagApp {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		// Conduct Testing Here.
 		IBag<Item> inventory = FileIO.readInventory();
 		PicnicBag<Item> picnic = new PicnicBag<Item>("small");
+		inventory.displayItems();
 		System.out.println("Please enter the ID of the stuff "
 				+ "you want to take with you. When finished, "
 				+ "enter -1.");
@@ -13,7 +15,7 @@ public class PicnicBagApp {
 		Scanner input = new Scanner(System.in);
 		int prompt = input.nextInt();
 		while (prompt != -1) {
-			Item item = inventory.removeByIndex(prompt);
+			Item item = inventory.removeByIndex(prompt - 1);
 			if (item != null) {
 				inventory.add(item);
 				enoughSpace = inventory.transferTo(picnic, item);
@@ -24,17 +26,20 @@ public class PicnicBagApp {
 			} else {
 				System.out.println("Item doesn't exist.");
 			}
+			inventory.displayItems();
 			prompt = input.nextInt();
+			
 		}
 		input.close();
 		System.out.println("You are goin to the picnic now...");
 		
-		@SuppressWarnings("unchecked")
-		IBag<Item>[] trashBags = (IBag<Item>[]) new Object[3]; // TODO fix
+		IBag<Item>[] trashBags;
+		IBag<Item>[] trashBagsProto = (IBag<Item>[]) new Object[3];
+		trashBags = trashBagsProto; // TODO fix
 		trashBags[0] = new OrganicTrashBag<Item>(); // fix also
 		trashBags[1] = new PlasticTrashBag<Item>(); // fix also
 		trashBags[2] = new PaperTrashBag<Item>(); // fix also
-		
+
 		while(prompt != 0)
 		{
 			System.out.println("Enter the item number that you wanna consume. "
