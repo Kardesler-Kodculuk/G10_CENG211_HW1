@@ -58,7 +58,7 @@ public class PicnicBagApp {
 		boolean enoughSpace;
 		int prompt = input.nextInt();
 		while (prompt != 0) {
-			Item item = inventory.removeByIndex(prompt); // If the item is removable
+			Item item = inventory.removeByIndex(prompt - 1); // If the item is removable
 			if (item != null) { // That means item does exist, so it can be transferred
 				inventory.add(item); // We add the item back, so it won't make a change
 				enoughSpace = inventory.transferTo(picnic, item); // And then transfer.
