@@ -120,7 +120,7 @@ public class PicnicBag<T> implements IBag<T> {
 	@Override
 	public int getIndexOf(T item) {
 		for(int i = 0; i < picnicBag.length; i++) {
-			if(picnicBag[i].equals(item)) {
+			if(picnicBag[i] != null && picnicBag[i].equals(item)) {
 				return i;
 			}
 		}
@@ -139,20 +139,33 @@ public class PicnicBag<T> implements IBag<T> {
 
 	@Override
 	public void displayItems() {
+		for(int i = 0; i < size; i++)
+		{
+			if(getItem(i) != null)
+			{
+				System.out.println((i + 1) + " - " + getItem(i));				
+			}
+
+		}
+		
+		
+//		for(T e:picnicBag) {
+//			if(e != null)
+//			System.out.println(e);
+//		
 //		for(int i = 0; i < picnicBag.length; i++)
 //		{
 //			if
 //			System.out.println((i+1) + " " + picnicBag[i]);
-		for(T e:picnicBag) {
-			if(e != null)
-			System.out.println(e);
-			else
-			{
-				System.out.println("Empty");
-			}
-		}
-		
+//		for(T e:picnicBag) {
+//			if(e != null)
+//			System.out.println(e);
+//			else
+//			{
+//				System.out.println("Empty");
+//			}
 	}
+		
 
 	@Override
 	public void dump() {
@@ -189,11 +202,14 @@ public class PicnicBag<T> implements IBag<T> {
 			switch(disposableType)
 			{
 			case "organic":
-				trashBags[0] = (IBag<T>) consumedItem;
+				trashBags[0].add((T) consumedItem);
+				break;
 			case "plastic":
-				trashBags[1] = (IBag<T>) consumedItem;
+				trashBags[1].add((T) consumedItem);
+				break;
 			case "paper":
-				trashBags[2] = (IBag<T>) consumedItem;
+				trashBags[2].add((T) consumedItem);
+				break;
 			}
 			return true;
 		}
@@ -202,6 +218,9 @@ public class PicnicBag<T> implements IBag<T> {
 
 	public T getItem(int index)
 	{
-		return picnicBag[index];
+		if(index >= 0 && index < size) {
+			return picnicBag[index];
+		}
+		else {return null;}
 	}
 }

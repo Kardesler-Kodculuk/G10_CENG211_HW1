@@ -101,7 +101,7 @@ public class OrganicTrashBag<T> implements IBag<T> {
 	@Override
 	public int getIndexOf(T item) {
 		for(int i = 0; i < trashBag.length; i++) {
-			if(trashBag[i].equals(item)) {
+			if(trashBag[i] != null && trashBag[i].equals(item)) {
 				return i;
 			}
 		}
