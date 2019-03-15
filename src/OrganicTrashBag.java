@@ -9,7 +9,6 @@ public class OrganicTrashBag<T> implements IBag<T> {
 		trashBag = (T[]) new Object[15];
 	}
 	
-	// adds a new item to the bag
 	@Override
 	public boolean add(T newItem) {
 		if(isFull()) 
@@ -29,21 +28,18 @@ public class OrganicTrashBag<T> implements IBag<T> {
 		}
 	}
 	
-	// if bag is empty returns true else returns false
 	@Override
 	public boolean isEmpty() {
 		if(getItemCount() == 0) {return true;}
 		else {return false;}
 	}
 	
-	// bag is empty, return true. else return false.
 	@Override
 	public boolean isFull() {
 		if(getItemCount() == 15) {return true;}
 		else {return false;}
 	}
 	
-	// remove an item by its index and return that item. if no item returns null
 	@Override
 	public T removeByIndex(int index) {
 		if(trashBag[index] == null) {return null;}
@@ -54,7 +50,6 @@ public class OrganicTrashBag<T> implements IBag<T> {
 		}
 	}
 	
-	// removes the last item in the bag. if its empty returns null
 	@Override
 	public T remove() {
 		for(int i = 0; i < 15; i++)
@@ -69,7 +64,6 @@ public class OrganicTrashBag<T> implements IBag<T> {
 		return null;
 	}
 
-	// remove an item by its name. if item does not exist return null
 	@Override
 	public T remove(T item) {
 		if(contains(item)) {
@@ -82,7 +76,6 @@ public class OrganicTrashBag<T> implements IBag<T> {
 		}
 	}
 
-	// returns how much item exists in the bag
 	@Override
 	public int getItemCount() {
 		int count = 0;
@@ -97,7 +90,6 @@ public class OrganicTrashBag<T> implements IBag<T> {
 		return count;
 	}
 
-	// returns the index of the specified item. if item doesn't exist returns -1.
 	@Override
 	public int getIndexOf(T item) {
 		for(int i = 0; i < trashBag.length; i++) {
@@ -108,7 +100,6 @@ public class OrganicTrashBag<T> implements IBag<T> {
 		return -1;
 	}
 
-	// if bag contains the item returns true, else returns false.
 	@Override
 	public boolean contains(T item) {
 		for(T e:trashBag) {
@@ -119,7 +110,6 @@ public class OrganicTrashBag<T> implements IBag<T> {
 		return false;
 	}
 	
-	// shows the items in the bag. doesn't return anything.
 	@Override
 	public void displayItems() {
 		for(T e:trashBag) {
@@ -128,7 +118,6 @@ public class OrganicTrashBag<T> implements IBag<T> {
 		}
 	}
 
-	// clears the bag. returns nothing.
 	@Override
 	public void dump() {
 		for(int i = 0; i < trashBag.length; i++) {

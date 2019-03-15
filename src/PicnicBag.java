@@ -26,11 +26,6 @@ public class PicnicBag<T> implements IBag<T> {
 		picnicBag = (T[]) new Object[this.size];
 	}
 	
-	
-	/** Adds new item
-	 * @param newItem - item to add
-	 * @return true if success, false if not
-	 */
 	@Override
 	public boolean add(T newItem) {
 		if(isFull()) 
@@ -148,22 +143,6 @@ public class PicnicBag<T> implements IBag<T> {
 
 		}
 		
-		
-//		for(T e:picnicBag) {
-//			if(e != null)
-//			System.out.println(e);
-//		
-//		for(int i = 0; i < picnicBag.length; i++)
-//		{
-//			if
-//			System.out.println((i+1) + " " + picnicBag[i]);
-//		for(T e:picnicBag) {
-//			if(e != null)
-//			System.out.println(e);
-//			else
-//			{
-//				System.out.println("Empty");
-//			}
 	}
 		
 
@@ -174,7 +153,7 @@ public class PicnicBag<T> implements IBag<T> {
 		}
 		
 	}
-
+	
 	@Override
 	public boolean transferTo(IBag<T> targetBag, T item) {
 		if(contains(item)) {
@@ -186,16 +165,16 @@ public class PicnicBag<T> implements IBag<T> {
 	}
 	
 	/**
-	 * Consumes the item and transfers it to a trashBag by it's disposableType
-	 * @param item	item that gonna consume
-	 * @param trashBags	an array that holds organic,plastic and paper trashBags
+	 * Consumes the item and transfers it to a trashBag by it's disposableType.
+	 * 
+	 * @param item - item's name
+	 * @param trashBags - an array that holds organic,plastic and paper trashBags
 	 * @return true if consumed, false if item doesn't exist
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean consume(T item, IBag<T>[] trashBags) {
 		if(contains(item)) 
 		{
-			//InventoryBag<Item> inventory = FileIO.readInventory();
 			Item consumedItem = (Item) this.remove(item);
 			String disposableType = consumedItem.getDisposibleType();
 
@@ -216,6 +195,12 @@ public class PicnicBag<T> implements IBag<T> {
 		else {return false;}
 	}
 
+	/**
+	 * Gets element by it's index.
+	 * 
+	 * @param index - index of the element
+	 * @return element of the bag
+	 */
 	public T getItem(int index)
 	{
 		if(index >= 0 && index < size) {
