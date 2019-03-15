@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.StringJoiner;
 import java.util.StringTokenizer;
 
 /** FileIO class handles the inventory
@@ -67,7 +66,7 @@ public class FileIO {
 		String[] linesArray = new String[lineCount];
 		Item[] items= new Item[lineCount];
 		int[] itemCounts = new int[lineCount];
-		boolean linesArrayPopulated = populateLinesArray(lineCount, linesArray, fileName); //Populate the lines array
+		populateLinesArray(lineCount, linesArray, fileName); //Populate the lines array
 
 		
 		StringTokenizer commaSeperator;
